@@ -1293,7 +1293,6 @@ function togglePomodoro(){
     stopPomodoroInterval();
     recordPomodoroSession();
     syncPomodoroDisplay();
-    render();
     return;
   }
   pomodoroState.running=true;
@@ -1313,7 +1312,7 @@ function togglePomodoro(){
   },1000);
   render();
 }
-function resetPomodoro(){pomodoroState.running=false;stopPomodoroInterval();pomodoroState.total=(Number(state.settings.pomodoroMinutes)||25)*60;pomodoroState.remaining=pomodoroState.total;render();}
+function resetPomodoro(){pomodoroState.running=false;stopPomodoroInterval();pomodoroState.total=(Number(state.settings.pomodoroMinutes)||25)*60;pomodoroState.remaining=pomodoroState.total;syncPomodoroDisplay();}
 function setPomodoroTime(){const l=false;openModal(l?"Set focus time":"Definir tempo de foco",field(l?"Minutes":"Minutos","minutes","number",state.settings.pomodoroMinutes||25,'min="1" max="180" required'),{submit:l?"Save":"Salvar"});modal.querySelector("#lidire-form").onsubmit=e=>{e.preventDefault();const m=Math.max(1,Math.min(180,Number(new FormData(e.target).get("minutes"))||25));state.settings.pomodoroMinutes=m;saveState();resetPomodoro();closeModal();render();};}
 async function openRecipeGenerator(){
   const l=false; const foods=(state.data.alimentos||[]).map(x=>x.name||x.title).filter(Boolean); const diets=(state.data.dietas||[]).map(x=>x.name).filter(Boolean);
