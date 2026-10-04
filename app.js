@@ -2351,8 +2351,6 @@ function familia(){
     ["🍽️",lang?"Nutrition":"Alimentação"],
     ["💰",lang?"Finances":"Finanças"],
     ["🎯",lang?"Goals":"Objetivos"],
-    ["🌸",lang?"Menstrual cycle":"Ciclo menstrual"],
-    ["🔔",lang?"Reminders":"Lembretes"]
   ];
   const memberRows=people.length?people.slice(0,6).map(x=>{
     const summary=familyPermissionSummary(x);
@@ -2582,7 +2580,7 @@ function buildAIContext() {
     lembretes: limit(state.data.lembretes, 30),
     notificacoesFamilia: limit(state.data.notificacoesFamilia, 10),
     lugares: limit(state.data.lugares, 40),
-    ciclo: state.settings.cycleAiContext ? state.data.cicloMenstrual : { periodos: [], sintomas: [] },
+    ciclo: limit (state.settings.cycleAiContext ? state.data.cicloMenstrual : { periodos: [], sintomas: [] }),
     alimentos: limit(state.data.alimentos, 80),
     dietas: limit(state.data.dietas, 30),
     receitas: limit(state.data.receitas, 30)
